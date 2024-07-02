@@ -1,8 +1,11 @@
-import { saveGroup, loadGroups } from "./group";
+import { saveGroup, loadGroups } from "./saveAndLoadGroups";
+import { handleDragStart, handleDragOver, handleDrop } from "./dragAndDrop";
 
 const createTask = (task, group) => {
     const todoTask = document.createElement('li');
     todoTask.className = task.completed ? 'styleComplete' : '';
+    todoTask.setAttribute('draggable', true);
+    todoTask.classList.add('drag-item');
 
     const todoTaskDiv = document.createElement('div');
 
@@ -37,6 +40,10 @@ const createTask = (task, group) => {
 
     todoTaskCheckbox.addEventListener('change', handleCompletedTask)
     deleteTaskButton.addEventListener('click', handleDeleteTask);
+
+    todoTask.addEventListener('dragstart', handleDragStart);
+    todoTask.addEventListener('dragover', handleDragOver);
+    todoTask.addEventListener('drop', handleDrop);
 
     return todoTask;
 }

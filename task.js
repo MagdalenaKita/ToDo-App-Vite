@@ -1,9 +1,6 @@
-import { saveGroup, loadGroups, groups, selectGroups } from "./group";
+import { todoInput, selectGroups, groups } from "./main";
+import { saveGroup, loadGroups } from "./saveAndLoadGroups";
 import { createTask } from "./createTask";
-
-const todoForm = document.getElementById('todoForm');
-const todoInput = document.getElementById('todoInput');
-const checkboxCheckAllTasks = document.getElementById('checkAllTasks');
 
 const getNewTask = (event) => {
     event.preventDefault();
@@ -44,17 +41,4 @@ const addTask = (task) => {
     loadGroups();
 }
 
-const markAllTasks = () => {
-    groups.forEach(group => {
-        group.tasks.forEach(task => {
-            checkboxCheckAllTasks.checked ? task.completed = true : task.completed = false;
-            saveGroup();
-            loadGroups();
-        })
-    })
-}
-
-todoForm.addEventListener('submit', getNewTask);
-checkboxCheckAllTasks.addEventListener("change", markAllTasks);
-
-
+export { getNewTask, createTask }
